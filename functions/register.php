@@ -23,8 +23,7 @@ if($pass != $pass_conf){
     $random_val=rand();
     $project_owner_id = md5($random_val);
 
-    $sql = "INSERT INTO users (username, pass, project_owner_id) VALUES ('$username', '$pass_conf', '$project_owner_id')";
-    // Execute query
+    $sql = "INSERT INTO users (username, pass, project_owner_id) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sss", $username, $pass_conf, $project_owner_id);
     $stmt->execute();
