@@ -81,9 +81,9 @@ if (!isset($_SESSION['username'])) {
         <?php
               $id = $_GET['id'];
               $project_id = $_SESSION['project_id'];
-              $sql = "SELECT id, project_owner_id, urls, project_name, nikto, whatweb, wafw00f, testssl, feroxbuster FROM projects WHERE id = ? AND project_owner_id = ?";
+              $sql = "SELECT id, project_owner_id, urls, project_name, nikto, whatweb, wafw00f, testssl, feroxbuster FROM projects WHERE id = ?";
               $stmt = $conn->prepare($sql);
-              $stmt->bind_param("is", $id, $project_id);
+              $stmt->bind_param("i", $id);
               $stmt->execute();
               $result = $stmt->get_result();
               $value = $result->fetch_assoc();
@@ -93,7 +93,7 @@ if (!isset($_SESSION['username'])) {
         <p class="h5 text-muted"><em><?= htmlspecialchars($value['urls']); ?></em></p>
         </h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="../profile.php"><button type="button" class="btn btn-sm btn-outline-dark m-1"><i class="fa-solid fa-user"></i> <?= htmlspecialchars($_SESSION['username']); ?></button></a>
+        <button class="btn btn-sm btn-dark m-1" disabled><i class="fa-solid fa-user"></i> <?= htmlspecialchars($_SESSION['username']); ?></button>
         <a href="../home.php?page=1"><button type="button" class="btn btn-sm btn-outline-success m-1"><i class="fa-solid fa-house"></i> Home</button></a>        
         </div>
       </div>
